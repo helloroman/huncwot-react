@@ -1,33 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import BeerThumbnail from 'components/BeerThumbnail/BeerThumbnail';
-import { API_URL } from '../constants';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Beers from './Beers';
+import BeerDetails from '../components/BeerDetails/BeerDetails';
+import BeersProvider from '../providers/BeersProvider';
 
 const Root = () => {
-  const [beers, setBeers] = useState([]);
-  const [loaderState, isLoading] = useState(false);
-
-  useEffect(() => {
-    isLoading(true);
-    axios.get(API_URL)
-      .then(({data}) => {
-        setBeers(data);
-        isLoading(false);
-      });
-  }, []);
-
   return (
-    <div>
-      {
-        loaderState ? (
-          <h2>Loading...</h2>
-        ) : (
-          beers.map(item => (
-            <BeerThumbnail beer={item} />
-          ))
-        )
-      }
-    </div>
+    <BrowserRouter>
+      <BeersProvider>
+        <h1>Beers</h1>
+        <Switch>
+          <Route path="/beers/:id" component={BeerDetails}/>
+          <Route exact path="/" component={Beers}/>
+          <Route path="*">
+            <p>Ni ma piwka</p>
+          </Route>
+        </Switch>
+      </BeersProvider>
+    </BrowserRouter>
   );
 };
 

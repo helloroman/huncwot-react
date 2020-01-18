@@ -1,3 +1,15 @@
 .wrapper {
+  border: 2px solid black;
+  padding: 10px;
 
+  img {
+    max-height: 300px;
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: initial;
+  font-size: 25px;
+  font-weight: bold;
 }

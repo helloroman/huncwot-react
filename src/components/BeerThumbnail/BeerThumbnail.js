@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import styles from './BeerThumbnail.module.scss';
 
-const BeerThumbnail = ({ beer: { name, tagline, image_url } }) => {
+
+const BeerThumbnail = ({ beer: { id, name, tagline, image_url } }) => {
   return (
-    <div>
-      <h2>{name}</h2>
+    <div className={styles.wrapper}>
+      <Link to={`/beers/${id}`} className={styles.link}>{name}</Link>
       <p>{tagline}</p>
-      <img src={image_url}/>
+      <img src={image_url} />
     </div>
   );
 };
